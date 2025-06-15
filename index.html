@@ -2,74 +2,13 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Thư viện ảnh sắp xếp</title>
-  <style>
-    body {
-      background: #2c1f1f;
-      color: #fff;
-      font-family: sans-serif;
-      text-align: center;
-    }
-
-    #imageInput {
-      margin: 20px 0;
-    }
-
-    #gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
-      padding: 10px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .thumb {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-    }
-
-    .thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-  </style>
+  <title>Upload Ảnh</title>
 </head>
 <body>
-
-  <h2>📸 Tải ảnh lên và sắp xếp theo tên</h2>
-  <input type="file" id="imageInput" multiple accept="image/*">
-  <div id="gallery"></div>
-
-  <script>
-    document.getElementById('imageInput').addEventListener('change', function(e) {
-      const files = Array.from(e.target.files);
-
-      // Sắp xếp theo tên file (a-z)
-      files.sort((a, b) => a.name.localeCompare(b.name));
-
-      const gallery = document.getElementById('gallery');
-      gallery.innerHTML = '';
-
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          const div = document.createElement('div');
-          div.classList.add('thumb');
-
-          const img = document.createElement('img');
-          img.src = event.target.result;
-
-          div.appendChild(img);
-          gallery.appendChild(div);
-        };
-        reader.readAsDataURL(file);
-      });
-    });
-  </script>
-
+  <h2>Chọn ảnh để tải lên</h2>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="image" required />
+    <button type="submit">Tải lên</button>
+  </form>
 </body>
 </html>
